@@ -1,5 +1,5 @@
-
 import mysql from "mysql2/promise";
+import importData from "./src/scripts/importData.js";
 
 const connection = await mysql.createConnection({
   host: "localhost",
@@ -8,9 +8,9 @@ const connection = await mysql.createConnection({
   database: "pixel_trader"
 });
 
-console.log("Connecté à la base MySQL !");
+console.log("Connected to MySQL");
 
-const [rows] = await connection.execute("INSERT * INTO produits");
-console.log(rows);
+await importData(connection);
 
 await connection.end();
+console.log("Connection closed");

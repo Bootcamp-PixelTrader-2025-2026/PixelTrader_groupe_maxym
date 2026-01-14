@@ -54,6 +54,11 @@ async function fetchCSV(url) {
       if (row.valeur_estimee) {
         row.valeur_estimee = await cleanAndConvert(row.valeur_estimee);
       }
+      if (row.etat) {
+        row.etat = row.etat.replace("Mint", "Neuf");
+        row.etat = row.etat.replace("Loose", "Sans boîte");
+        row.etat = row.etat.replace("Good", "Bon état");
+      }
 
       let str = row.plateforme;
       let majuscules = str.match(/[A-Z]/g) || [];
