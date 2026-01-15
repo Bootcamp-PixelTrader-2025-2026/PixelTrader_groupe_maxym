@@ -81,4 +81,4 @@ async function fetchCSV(url) {
 }
 
 
-fetchCSV("data/stock_legacy_full.csv");
+// fetchCSV("data/stock_legacy_full.csv");

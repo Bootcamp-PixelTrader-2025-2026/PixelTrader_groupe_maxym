@@ -1,18 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PixelTrader - Marketplace futuriste pour jeux vidéo rétro">
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <link rel="stylesheet" href="./css/destyle.css">
-    <title>Pixel Trader</title>
+    <link rel="stylesheet" href="./CSS/destyle.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>PixelTrader | Marketplace Cyberpunk</title>
 </head>
 <body>
-    <h1>hello</h1>
+    <div class="background-grid"></div>
+    <div class="scanlines"></div>
+    
+    <header class="header">
+        <div class="header__container">
+            <div class="logo">
+                <span class="logo__text" data-text="PIXELTRADER">PIXELTRADER</span>
+                <div class="logo__glow"></div>
+            </div>
+            <nav class="nav">
+                <button class="nav__btn" data-active="true">Marketplace</button>
+                <button class="nav__btn">FAQ</button>
+                <a href="./admin.html" class="nav__btn" style="text-decoration: none; display: inline-block;">Admin</a>
+            </nav>
+        </div>
+    </header>
 
-    <h2>Liste des utilisateurs actifs</h2>
-    <ul id="user-list"></ul>
-    <pre id="output"></pre>
+    <main class="main">
+        <section class="hero">
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    <span class="hero__title-line">RETRO</span>
+                    <span class="hero__title-line hero__title-line--accent">GAMING</span>
+                    <span class="hero__title-line">MARKETPLACE</span>
+                </h1>
+                <p class="hero__subtitle">Acquérir • Échanger • Collectionner</p>
+            </div>
+            <div class="hero__stats">
+                <div class="stat-card">
+                    <div class="stat-card__label">PRODUITS</div>
+                    <div class="stat-card__value" id="product-count">--</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">VALEUR TOTALE</div>
+                    <div class="stat-card__value" id="total-value">--</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products">
+            <div class="products__header">
+                <h2 class="section-title">
+                    <span class="section-title__text">CATALOGUE</span>
+                    <span class="section-title__line"></span>
+                </h2>
+                <div class="products__filters">
+                    <button class="filter-btn filter-btn--active">TOUS</button>
+                    <button class="filter-btn" id="sort-az">A-Z</button>
+                    <button class="filter-btn" id="sort-year">DATES</button>
+                </div>
+            </div>
+            
+            <div class="products__grid" id="user-list"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <p class="footer__text">© 2026 PIXELTRADER</p>
+            <div class="footer__links">
+                <a href="#" class="footer__link">API</a>
+                <a href="#" class="footer__link">DOCS</a>
+                <a href="#" class="footer__link">SUPPORT</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="./js/cleanCSV.js"></script>
     <script src="./js/displayProducts.js"></script>
 </body>
