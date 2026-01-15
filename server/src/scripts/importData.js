@@ -10,7 +10,7 @@ export default async function importData() {
   });
 
   const data = JSON.parse(
-    fs.readFileSync("./data/stock.json", "utf-8")
+    fs.readFileSync("./stock.json", "utf-8")
   );
 
 

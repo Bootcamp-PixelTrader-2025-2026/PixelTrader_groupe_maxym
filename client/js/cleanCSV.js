@@ -71,6 +71,9 @@ async function fetchCSV(url) {
 
     console.log(result.data);
     document.getElementById("output").innerText = JSON.stringify(result.data, null, 2);
+    result.data.sort((a, b) => a.titre_jeu.localeCompare(b.titre_jeu, 'fr', { sensitivity: 'base' }));
+
+
 
   } catch (error) {
     console.error("Error fetching CSV:", error);

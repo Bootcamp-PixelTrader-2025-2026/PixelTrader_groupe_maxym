@@ -1,16 +1,19 @@
-import mysql from "mysql2/promise";
-import importData from "./src/scripts/importData.js";
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import router from './src/scripts/routes.js'
 
-const connection = await mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "pixel_trader"
-});
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-console.log("Connected to MySQL");
+const app = express()
+const PORT = 3000
 
-await importData(connection);
+app.use(express.json())
+app.use('/api', router)
 
-await connection.end();
-console.log("Connection closed");
+app.use(express.static(path.join(__dirname, '../client')))
+
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`)
+})
