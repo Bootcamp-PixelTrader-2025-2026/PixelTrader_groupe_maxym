@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise'
 
 const router = express.Router()
 
+// Database connection
 async function getConnection() {
     return mysql.createConnection({
         host: 'localhost',
@@ -12,10 +13,9 @@ async function getConnection() {
     })
 }
 
-// Mot de passe admin (simple, à changer pour la production)
 const ADMIN_PASSWORD = 'admin123'
 
-// Fonction pour vérifier le mot de passe
+// Verify admin password
 function checkPassword(req, res) {
     const password = req.body.password
     if (password !== ADMIN_PASSWORD) {
@@ -25,7 +25,7 @@ function checkPassword(req, res) {
     return true
 }
 
-// Route: Obtenir tous les produits
+// Get all products
 router.get('/produits', async (req, res) => {
     try {
         const connection = await getConnection()
@@ -39,7 +39,8 @@ router.get('/produits', async (req, res) => {
     }
 })
 
-// Route: Connexion admin
+
+// Admin login endpoint
 router.post('/admin/login', (req, res) => {
     const password = req.body.password
     if (password === ADMIN_PASSWORD) {
@@ -49,7 +50,8 @@ router.post('/admin/login', (req, res) => {
     }
 })
 
-// Route: Ajouter un produit
+
+// Create new product
 router.post('/admin/produits', async (req, res) => {
     if (!checkPassword(req, res)) return
     
@@ -69,7 +71,8 @@ router.post('/admin/produits', async (req, res) => {
     }
 })
 
-// Route: Modifier un produit
+
+// Update product
 router.put('/admin/produits/:id', async (req, res) => {
     if (!checkPassword(req, res)) return
     
@@ -90,7 +93,8 @@ router.put('/admin/produits/:id', async (req, res) => {
     }
 })
 
-// Route: Supprimer un produit
+
+// Delete product
 router.delete('/admin/produits/:id', async (req, res) => {
     if (!checkPassword(req, res)) return
     

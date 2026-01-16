@@ -1,3 +1,4 @@
+// Fetch and clean CSV data
 async function fetchCSV(url) {
   try {
     const response = await fetch(url);
@@ -9,6 +10,7 @@ async function fetchCSV(url) {
       skipEmptyLines: true,
     });
 
+    // Currency conversion functions
     async function convertUSDToEUR(amount) {
       if (amount === 0) return 0;
       const resp = await fetch(`https://api.frankfurter.dev/v1/latest?base=USD&symbols=EUR`);
@@ -24,11 +26,12 @@ async function fetchCSV(url) {
     }
 
     for (const row of result.data) {
-      
+      // Filter out trash items
       result.data = result.data.filter(row => {
         return !(row.emplacement && row.emplacement.includes("Poubelle"));
       });
 
+      // Clean and convert price to EUR
       async function cleanAndConvert(price) {
         if (!price || price.toUpperCase() === "NULL") return "0€";
         price = String(price).replace(/\s/g, "");

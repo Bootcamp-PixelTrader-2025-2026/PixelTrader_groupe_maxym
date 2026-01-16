@@ -13,7 +13,6 @@ const PORT = 3000
 app.use(cors())
 app.use(express.json())
 app.use('/api', router)
-
 app.use(express.static(path.join(__dirname, '../client')))
 
 app.listen(PORT, () => {

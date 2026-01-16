@@ -1,12 +1,8 @@
-// Variable pour stocker le mot de passe admin (côté serveur)
-// Ici on vérifie juste qu'on est connecté
 let isLoggedIn = false;
 let currentPassword = '';
-
-// Liste des produits
 let produits = [];
 
-// Se connecter
+// Admin login
 async function login() {
     const password = document.getElementById('password').value;
     const errorDiv = document.getElementById('loginError');
@@ -34,15 +30,13 @@ async function login() {
     }
 }
 
-// Se déconnecter
 function logout() {
     isLoggedIn = false;
     currentPassword = '';
-    // Rediriger vers la page d'accueil
     window.location.href = './index.html';
 }
 
-// Charger la liste des produits
+// Load products from API
 async function loadProduits() {
     try {
         const response = await fetch('/api/produits');
@@ -54,7 +48,8 @@ async function loadProduits() {
     }
 }
 
-// Afficher la liste des produits
+
+// Display products list
 function displayProduits() {
     const listDiv = document.getElementById('productsList');
     listDiv.innerHTML = '';
@@ -80,7 +75,7 @@ function displayProduits() {
     });
 }
 
-// Remplir le formulaire pour modifier un produit
+// Load product data into form for editing
 function editProduct(id) {
     const produit = produits.find(p => p.id === id);
     if (!produit) return;
@@ -96,7 +91,6 @@ function editProduct(id) {
     document.getElementById('productForm').scrollIntoView();
 }
 
-// Réinitialiser le formulaire
 function resetForm() {
     document.getElementById('productForm').reset();
     document.getElementById('productId').value = '';
@@ -104,7 +98,7 @@ function resetForm() {
     document.getElementById('message').textContent = '';
 }
 
-// Enregistrer un produit (ajout ou modification)
+// Create or update product
 async function saveProduct(event) {
     event.preventDefault();
     
@@ -128,14 +122,12 @@ async function saveProduct(event) {
     try {
         let response;
         if (id) {
-            // Modifier un produit existant
             response = await fetch(`/api/admin/produits/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(productData)
             });
         } else {
-            // Ajouter un nouveau produit
             response = await fetch('/api/admin/produits', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -160,7 +152,8 @@ async function saveProduct(event) {
     }
 }
 
-// Supprimer un produit
+
+// Delete product
 async function deleteProduct(id) {
     if (!isLoggedIn) {
         alert('Vous devez être connecté');

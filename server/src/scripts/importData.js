@@ -1,6 +1,7 @@
 import mysql from "mysql2/promise";
 import fs from "fs";
 
+// Import data from JSON to database
 export default async function importData() {
   const connection = await mysql.createConnection({
     host: "localhost",
@@ -13,7 +14,7 @@ export default async function importData() {
     fs.readFileSync("./stock.json", "utf-8")
   );
 
-
+  // Collect unique platforms and locations
   const plateformes = new Set();
   const emplacements = new Set();
 
@@ -22,6 +23,7 @@ export default async function importData() {
     if (item.emplacement) emplacements.add(item.emplacement);
   }
 
+  // Insert platforms
   for (const nom of plateformes) {
     await connection.execute(
       "INSERT IGNORE INTO plateformes (nom) VALUES (?)",
@@ -29,6 +31,7 @@ export default async function importData() {
     );
   }
 
+  // Insert locations
   for (const nom of emplacements) {
     await connection.execute(
       "INSERT IGNORE INTO emplacements (nom) VALUES (?)",
@@ -36,6 +39,7 @@ export default async function importData() {
     );
   }
 
+// Insert products
 for (const item of data) {
     
     const [[plateforme]] = await connection.execute(
