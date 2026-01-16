@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+// Flexbox utilities
+@mixin flex-between() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Text styles
+@mixin text-secondary() {
+  color: $text-secondary;
+}
+
+@mixin text-neon() {
+  color: $neon-cyan;
+}
+
+// Card styles
+@mixin card-base() {
+  background: $bg-card;
+  border: $border-neon;
+  border-radius: 8px;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+}
+
+@mixin card-hover() {
+  transform: translateY(-4px);
+  background: $bg-card-hover;
+  @include neon-shadow();
+}
+
+// Neon effects
+@mixin neon-shadow($color: $neon-cyan, $intensity: normal) {
+  @if $intensity == strong {
+    box-shadow: $shadow-neon-strong;
+  } @else {
+    box-shadow: $shadow-neon;
+  }
+}
+
+@mixin neon-glow() {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+               0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+@mixin neon-button() {
+  background: transparent;
+  border: $border-neon;
+  border-radius: 4px;
+  cursor: pointer;
+  @include transition(all);
+  
+  &:hover {
+    background: rgba(0, 255, 255, 0.1);
+  }
+}
+
+// Gradient effects
+@mixin gradient-sweep($color: $neon-cyan, $opacity: 0.1) {
+  background: linear-gradient(
+    135deg,
+    rgba($color, $opacity) 0%,
+    transparent 50%,
+    rgba($color, $opacity) 100%
+  );
+}
+
+// Backdrop blur
+@mixin backdrop-blur() {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+// Transitions
+@mixin transition($property: all) {
+  transition: $property $transition-base;
+}

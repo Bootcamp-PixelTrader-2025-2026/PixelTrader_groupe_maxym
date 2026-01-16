@@ -1,0 +1,138 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations' as *;
+
+.card_wrapper {
+  position: relative;
+  padding: $spacing-lg;
+  @include card-base();
+  cursor: pointer;
+  @include gradient-sweep($neon-cyan, 0.1);
+
+  &:hover {
+    transform: translateY(-8px);
+    @include neon-shadow($neon-cyan, strong);
+    border-color: $neon-cyan;
+
+    .card_wrapper__glow {
+      opacity: 1;
+    }
+  }
+
+  &__glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity $transition-base;
+    pointer-events: none;
+  }
+
+  p {
+    margin: 0 0 $spacing-sm 0;
+    @include text-secondary();
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+
+    &:first-child {
+      @include text-neon();
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: $spacing-md;
+      padding-bottom: $spacing-sm;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      @include neon-glow();
+      animation: neon-flicker 3s ease-in-out infinite;
+      text-align: end;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      font-size: 0.9rem;
+      color: $text-secondary;
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      &::before {
+       
+        color: $neon-cyan;
+        font-size: 0.7rem;
+        opacity: 0.7;
+        flex-shrink: 0;
+        margin-right: $spacing-xs;
+      }
+
+      span {
+        &:first-child {
+          color: $text-tertiary;
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          letter-spacing: 0.05em;
+          white-space: nowrap;
+        }
+
+        &:last-child {
+          color: $text-primary;
+          font-weight: 600;
+          margin-left: auto;
+        }
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+      margin-top: $spacing-md;
+      padding-top: $spacing-sm;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      font-weight: 600;
+      color: $neon-green;
+      font-size: 1rem;
+      @include flex-between();
+      gap: $spacing-sm;
+
+      &::before {
+        content: '▶';
+        color: $neon-green;
+        font-size: 0.7rem;
+        opacity: 0.7;
+        flex-shrink: 0;
+      }
+
+      span {
+        &:first-child {
+          color: $text-tertiary;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+          letter-spacing: 0.05em;
+        }
+
+        &:last-child {
+          color: $neon-green;
+          text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.products__grid:empty::after {
+  content: 'AUCUN PRODUIT DISPONIBLE';
+  display: block;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: $spacing-xxl;
+  font-family: $font-secondary;
+  font-size: 1.2rem;
+  color: $text-tertiary;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}

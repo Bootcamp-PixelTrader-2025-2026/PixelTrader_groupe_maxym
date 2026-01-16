@@ -1,0 +1,278 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+  font-family: $font-secondary;
+  background: $bg-primary;
+  color: $text-primary;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-header;
+  background: rgba(10, 10, 15, 0.95);
+  @include backdrop-blur();
+  border-bottom: $border-neon;
+  @include neon-shadow();
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $spacing-md $spacing-lg;
+    @include flex-between();
+    gap: $spacing-lg;
+  }
+
+  &__status {
+    padding: $spacing-xs $spacing-lg;
+    border-top: $border-neon;
+    background: rgba(0, 255, 255, 0.05);
+  }
+}
+
+.logo {
+  position: relative;
+  
+  &__text {
+    @include text-neon();
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    animation: neon-pulse 2s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $neon-cyan;
+    filter: blur(20px);
+    opacity: 0.5;
+    z-index: 1;
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: $spacing-sm;
+
+  &__btn {
+    @include text-secondary();
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: $spacing-xs $spacing-md;
+    @include neon-button();
+    @include gradient-sweep();
+
+    &:hover {
+      color: $neon-cyan;
+    }
+
+    &[data-active="true"] {
+      color: $neon-cyan;
+      background: rgba(0, 255, 255, 0.1);
+      @include neon-shadow();
+    }
+  }
+}
+
+
+.main {
+  position: relative;
+  z-index: $z-content;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-lg;
+}
+
+
+.hero {
+  margin-bottom: $spacing-xxl;
+  text-align: center;
+
+  &__content {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    &-line {
+      display: block;
+      color: $text-primary;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+
+      &--accent {
+        color: $neon-cyan;
+        animation: neon-pulse 3s ease-in-out infinite;
+        text-shadow: $shadow-neon-strong;
+      }
+    }
+  }
+
+  &__subtitle {
+    @include text-secondary();
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    margin-top: $spacing-md;
+    text-transform: uppercase;
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+}
+
+.stat-card {
+  padding: $spacing-md $spacing-lg;
+  @include card-base();
+  min-width: 200px;
+
+  &:hover {
+    @include card-hover();
+  }
+
+  &__label {
+    font-family: $font-secondary;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $text-tertiary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__value {
+    @include text-neon();
+    font-size: 2rem;
+    font-weight: 700;
+    @include neon-glow();
+  }
+}
+
+.products {
+  &__header {
+    @include flex-between();
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__filters {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+    min-height: 400px;
+  }
+}
+
+.section-title {
+  font-family: $font-primary;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: $text-primary;
+  position: relative;
+  display: inline-block;
+
+  &__text {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__line {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, $neon-cyan, transparent);
+    @include neon-shadow();
+  }
+}
+
+.filter-btn {
+  @include text-secondary();
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: $spacing-xs $spacing-md;
+  @include neon-button();
+
+  &--active {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: $neon-cyan;
+    color: $neon-cyan;
+    @include neon-shadow();
+  }
+}
+
+
+.footer {
+  margin-top: $spacing-xxl;
+  padding: $spacing-lg;
+  border-top: $border-neon;
+  background: rgba(10, 10, 15, 0.8);
+  @include backdrop-blur();
+
+  &__content {
+    max-width: 1400px;
+    margin: 0 auto;
+    @include flex-between();
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__text {
+    font-family: $font-secondary;
+    font-size: 0.85rem;
+    color: $text-tertiary;
+    letter-spacing: 0.1em;
+  }
+
+  &__links {
+    display: flex;
+    gap: $spacing-lg;
+  }
+
+  &__link {
+    @include text-secondary();
+    font-size: 0.85rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    @include transition(color);
+
+    &:hover {
+      color: $neon-cyan;
+      @include neon-glow();
+    }
+  }
+}
+

@@ -1,0 +1,47 @@
+$neon-cyan: #00ffff;
+$neon-pink: #ff00ff;
+$neon-purple: #9d00ff;
+$neon-blue: #0099ff;
+$neon-green: #00ff41;
+$neon-yellow: #ffff00;
+
+$bg-primary: #0a0a0f;
+$bg-secondary: #0f0f1a;
+$bg-tertiary: #151520;
+$bg-card: rgba(15, 15, 26, 0.8);
+$bg-card-hover: rgba(20, 20, 35, 0.95);
+
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.7);
+$text-tertiary: rgba(255, 255, 255, 0.5);
+$text-accent: $neon-cyan;
+
+$border-neon: 1px solid $neon-cyan;
+$border-neon-pink: 1px solid $neon-pink;
+$shadow-neon: 0 0 10px rgba(0, 255, 255, 0.5),
+              0 0 20px rgba(0, 255, 255, 0.3),
+              0 0 30px rgba(0, 255, 255, 0.2);
+$shadow-neon-pink: 0 0 10px rgba(255, 0, 255, 0.5),
+                   0 0 20px rgba(255, 0, 255, 0.3);
+$shadow-neon-strong: 0 0 20px rgba(0, 255, 255, 0.8),
+                     0 0 40px rgba(0, 255, 255, 0.5),
+                     0 0 60px rgba(0, 255, 255, 0.3);
+
+$font-primary: 'Orbitron', monospace;
+$font-secondary: 'Rajdhani', sans-serif;
+
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-xxl: 4rem;
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+$z-background: 1;
+$z-content: 10;
+$z-header: 100;
+$z-overlay: 1000;
