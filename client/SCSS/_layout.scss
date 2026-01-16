@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 body {
   font-family: $font-secondary;
@@ -14,17 +15,15 @@ body {
   top: 0;
   z-index: $z-header;
   background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(10px);
+  @include backdrop-blur();
   border-bottom: $border-neon;
-  box-shadow: $shadow-neon;
+  @include neon-shadow();
 
   &__container {
     max-width: 1400px;
     margin: 0 auto;
     padding: $spacing-md $spacing-lg;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-between();
     gap: $spacing-lg;
   }
 
@@ -39,12 +38,10 @@ body {
   position: relative;
   
   &__text {
-    font-family: $font-primary;
+    @include text-neon();
     font-size: 1.8rem;
     font-weight: 900;
     letter-spacing: 0.2em;
-    color: $neon-cyan;
-    text-transform: uppercase;
     animation: neon-pulse 2s ease-in-out infinite;
     position: relative;
     z-index: 2;
@@ -69,45 +66,23 @@ body {
   gap: $spacing-sm;
 
   &__btn {
-    font-family: $font-secondary;
+    @include text-secondary();
     font-size: 0.9rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     padding: $spacing-xs $spacing-md;
-    background: transparent;
-    border: $border-neon;
-    color: $text-secondary;
-    cursor: pointer;
-    transition: all $transition-base;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-      transition: left $transition-slow;
-    }
+    @include neon-button();
+    @include gradient-sweep();
 
     &:hover {
       color: $neon-cyan;
-      box-shadow: $shadow-neon;
-      border-color: $neon-cyan;
-
-      &::before {
-        left: 100%;
-      }
     }
 
     &[data-active="true"] {
       color: $neon-cyan;
       background: rgba(0, 255, 255, 0.1);
-      box-shadow: $shadow-neon;
+      @include neon-shadow();
     }
   }
 }
@@ -153,11 +128,10 @@ body {
   }
 
   &__subtitle {
-    font-family: $font-secondary;
+    @include text-secondary();
     font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 0.3em;
-    color: $text-secondary;
     margin-top: $spacing-md;
     text-transform: uppercase;
   }
@@ -172,15 +146,11 @@ body {
 
 .stat-card {
   padding: $spacing-md $spacing-lg;
-  border: $border-neon;
-  background: $bg-card;
-  backdrop-filter: blur(10px);
+  @include card-base();
   min-width: 200px;
-  transition: all $transition-base;
 
   &:hover {
-    box-shadow: $shadow-neon;
-    transform: translateY(-5px);
+    @include card-hover();
   }
 
   &__label {
@@ -193,19 +163,16 @@ body {
   }
 
   &__value {
-    font-family: $font-primary;
+    @include text-neon();
     font-size: 2rem;
     font-weight: 700;
-    color: $neon-cyan;
-    text-shadow: $shadow-neon;
+    @include neon-glow();
   }
 }
 
 .products {
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-between();
     margin-bottom: $spacing-xl;
     flex-wrap: wrap;
     gap: $spacing-md;
@@ -246,34 +213,24 @@ body {
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, $neon-cyan, transparent);
-    box-shadow: $shadow-neon;
+    @include neon-shadow();
   }
 }
 
 .filter-btn {
-  font-family: $font-secondary;
+  @include text-secondary();
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: $spacing-xs $spacing-md;
-  background: transparent;
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  color: $text-secondary;
-  cursor: pointer;
-  transition: all $transition-base;
-
-  &:hover {
-    border-color: $neon-cyan;
-    color: $neon-cyan;
-    box-shadow: $shadow-neon;
-  }
+  @include neon-button();
 
   &--active {
     background: rgba(0, 255, 255, 0.1);
     border-color: $neon-cyan;
     color: $neon-cyan;
-    box-shadow: $shadow-neon;
+    @include neon-shadow();
   }
 }
 
@@ -283,14 +240,12 @@ body {
   padding: $spacing-lg;
   border-top: $border-neon;
   background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(10px);
+  @include backdrop-blur();
 
   &__content {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-between();
     flex-wrap: wrap;
     gap: $spacing-md;
   }
@@ -308,17 +263,15 @@ body {
   }
 
   &__link {
-    font-family: $font-secondary;
+    @include text-secondary();
     font-size: 0.85rem;
-    color: $text-secondary;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: color $transition-base;
+    @include transition(color);
 
     &:hover {
       color: $neon-cyan;
-      text-shadow: $shadow-neon;
+      @include neon-glow();
     }
   }
 }
